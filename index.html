@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>スマホ見積もりシミュレーター</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div class="title-block">
+          <p class="eyebrow">Mobile Quote</p>
+          <h1>スマホ見積もりシミュレーター</h1>
+          <p>現在の利用状況、機種変更、MNPの見積もりを横並びで比較できます。</p>
+          <div class="header-actions">
+            <button class="pdf-button" type="button" data-export-pdf>PDF出力</button>
+          </div>
+        </div>
+
+        <section class="summary-strip" aria-label="比較サマリー">
+          <article>
+            <span>現状月額</span>
+            <strong id="summary-current">¥0</strong>
+          </article>
+          <article>
+            <span>機種変更 1〜24ヶ月</span>
+            <strong id="summary-change">¥0</strong>
+          </article>
+          <article>
+            <span>MNP 1〜24ヶ月</span>
+            <strong id="summary-mnp">¥0</strong>
+          </article>
+        </section>
+      </header>
+
+      <section class="quote-grid" aria-label="見積もり入力欄">
+        <form class="quote-panel current-panel" data-plan="current">
+          <header class="panel-header">
+            <div>
+              <h2>現在の利用状況</h2>
+            </div>
+            <button class="icon-button" type="button" data-reset="current" aria-label="現在の入力をリセット" title="リセット">
+              ↺
+            </button>
+          </header>
+
+          <div class="field-stack">
+            <label class="form-field">
+              <span>基本料金 / 月</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="base" placeholder="例: 2970" />
+            </label>
+
+            <fieldset class="discount-field">
+              <legend>月額割引</legend>
+              <label class="discount-option">
+                <input type="checkbox" data-key="netDiscount" />
+                <span>
+                  <strong>ネット割あり</strong>
+                  <small data-discount-meta="netDiscount">標準 -¥1,100/月</small>
+                </span>
+              </label>
+              <label class="discount-option">
+                <input type="checkbox" data-key="familyDiscount" />
+                <span>
+                  <strong>家族割あり</strong>
+                  <small data-discount-meta="familyDiscount">標準 -¥1,100/月</small>
+                </span>
+              </label>
+            </fieldset>
+
+            <fieldset class="segmented-field family-line-field is-hidden" data-family-line-field aria-hidden="true">
+              <legend>家族割の対象回線</legend>
+              <div class="segmented-control">
+                <label>
+                  <input type="radio" name="current-family-line" value="first" data-key="familyLine" checked />
+                  <span>1回線目</span>
+                </label>
+                <label>
+                  <input type="radio" name="current-family-line" value="additional" data-key="familyLine" />
+                  <span>2回線目以降</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="segmented-field family-count-field is-hidden" data-family-count-field aria-hidden="true">
+              <legend>家族割の回線数</legend>
+              <div class="segmented-control">
+                <label>
+                  <input type="radio" name="current-family-count" value="one" data-key="familyGroupSize" />
+                  <span>1人</span>
+                </label>
+                <label>
+                  <input type="radio" name="current-family-count" value="two" data-key="familyGroupSize" />
+                  <span>2人</span>
+                </label>
+                <label>
+                  <input type="radio" name="current-family-count" value="three" data-key="familyGroupSize" checked />
+                  <span>3人以上</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="manual-discount-field">
+              <legend>実質負担調整</legend>
+              <div class="manual-discount-grid">
+                <label class="form-field">
+                  <span>月額マイナス額</span>
+                  <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="customDiscountMonthly" placeholder="例: 5000" />
+                </label>
+                <label class="form-field">
+                  <span>対象月数</span>
+                  <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="customDiscountMonths" data-format="months" placeholder="例: 6" />
+                </label>
+              </div>
+            </fieldset>
+
+            <label class="form-field">
+              <span>端末料金 / 月</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="device" placeholder="例: 2200" />
+            </label>
+          </div>
+
+          <section class="result-block" aria-label="現在の利用状況の計算結果">
+            <div class="result-line primary">
+              <span>月額合計</span>
+              <strong data-output="monthly">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>割引合計 / 月</span>
+              <strong data-output="discountTotal">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span data-output-label="effectiveMonthly">実質負担</span>
+              <strong data-output="effectiveMonthly">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>24ヶ月合計</span>
+              <strong data-output="total24">¥0</strong>
+            </div>
+          </section>
+        </form>
+
+        <form class="quote-panel" data-plan="change">
+          <header class="panel-header">
+            <div>
+              <h2>機種変更</h2>
+            </div>
+            <button class="icon-button" type="button" data-reset="change" aria-label="機種変更の入力をリセット" title="リセット">
+              ↺
+            </button>
+          </header>
+
+          <div class="field-stack">
+            <label class="form-field">
+              <span>基本料金 / 月</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="base" placeholder="例: 3278" />
+            </label>
+
+            <fieldset class="discount-field">
+              <legend>月額割引</legend>
+              <label class="discount-option">
+                <input type="checkbox" data-key="netDiscount" />
+                <span>
+                  <strong>ネット割あり</strong>
+                  <small data-discount-meta="netDiscount">標準 -¥1,100/月</small>
+                </span>
+              </label>
+              <label class="discount-option">
+                <input type="checkbox" data-key="familyDiscount" />
+                <span>
+                  <strong>家族割あり</strong>
+                  <small data-discount-meta="familyDiscount">標準 -¥1,100/月</small>
+                </span>
+              </label>
+            </fieldset>
+
+            <fieldset class="segmented-field family-line-field is-hidden" data-family-line-field aria-hidden="true">
+              <legend>家族割の対象回線</legend>
+              <div class="segmented-control">
+                <label>
+                  <input type="radio" name="change-family-line" value="first" data-key="familyLine" checked />
+                  <span>1回線目</span>
+                </label>
+                <label>
+                  <input type="radio" name="change-family-line" value="additional" data-key="familyLine" />
+                  <span>2回線目以降</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="segmented-field family-count-field is-hidden" data-family-count-field aria-hidden="true">
+              <legend>家族割の回線数</legend>
+              <div class="segmented-control">
+                <label>
+                  <input type="radio" name="change-family-count" value="one" data-key="familyGroupSize" />
+                  <span>1人</span>
+                </label>
+                <label>
+                  <input type="radio" name="change-family-count" value="two" data-key="familyGroupSize" />
+                  <span>2人</span>
+                </label>
+                <label>
+                  <input type="radio" name="change-family-count" value="three" data-key="familyGroupSize" checked />
+                  <span>3人以上</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="segmented-field">
+              <legend>端末料金の支払い方法</legend>
+              <div class="segmented-control">
+                <label>
+                  <input type="radio" name="change-payment" value="lump" data-key="paymentType" />
+                  <span>一括</span>
+                </label>
+                <label>
+                  <input type="radio" name="change-payment" value="installment" data-key="paymentType" checked />
+                  <span>分割</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="payment-fields" data-payment-group="lump">
+              <label class="form-field">
+                <span>端末一括料金</span>
+                <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="deviceLump" placeholder="例: 98560" />
+              </label>
+            </div>
+
+            <div class="payment-fields" data-payment-group="installment">
+              <label class="form-field">
+                <span>前半24ヶ月の分割金 / 月</span>
+                <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="deviceFirst24" placeholder="例: 2100" />
+              </label>
+
+              <label class="form-field">
+                <span>25〜48ヶ月目の分割金 / 月</span>
+                <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="deviceAfter24" placeholder="例: 2100" />
+              </label>
+              <p class="field-note">備考: 返却で支払免除</p>
+            </div>
+
+            <label class="form-field">
+              <span>頭金</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="downPayment" placeholder="例: 11000" />
+            </label>
+
+            <label class="form-field">
+              <span>プログラム利用料（返却時）</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="programFee" placeholder="例: 0" />
+            </label>
+
+            <label class="form-field">
+              <span>事務手数料</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="adminFee" placeholder="例: 3850" />
+            </label>
+
+            <label class="form-field">
+              <span>補償 / 月</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="warranty" placeholder="例: 990" />
+            </label>
+          </div>
+
+          <section class="result-block" aria-label="機種変更の計算結果">
+            <div class="result-line primary">
+              <span>1〜24ヶ月目</span>
+              <strong data-output="monthlyFirst24">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>割引合計 / 月</span>
+              <strong data-output="discountTotal">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span data-output-label="effectiveMonthly">実質負担</span>
+              <strong data-output="effectiveMonthly">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>25〜48ヶ月目（継続時）</span>
+              <strong data-output="monthlyAfter24">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>初期・一括費用</span>
+              <strong data-output="initialCost">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>返却時費用</span>
+              <strong data-output="returnCost">¥0</strong>
+            </div>
+          </section>
+        </form>
+
+        <form class="quote-panel" data-plan="mnp">
+          <header class="panel-header">
+            <div>
+              <h2>MNP</h2>
+            </div>
+            <button class="icon-button" type="button" data-reset="mnp" aria-label="MNPの入力をリセット" title="リセット">
+              ↺
+            </button>
+          </header>
+
+          <div class="field-stack">
+            <label class="form-field">
+              <span>基本料金 / 月</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="base" placeholder="例: 2178" />
+            </label>
+
+            <fieldset class="discount-field">
+              <legend>月額割引</legend>
+              <label class="discount-option">
+                <input type="checkbox" data-key="netDiscount" />
+                <span>
+                  <strong>ネット割あり</strong>
+                  <small data-discount-meta="netDiscount">標準 -¥1,100/月</small>
+                </span>
+              </label>
+              <label class="discount-option">
+                <input type="checkbox" data-key="familyDiscount" />
+                <span>
+                  <strong>家族割あり</strong>
+                  <small data-discount-meta="familyDiscount">標準 -¥1,100/月</small>
+                </span>
+              </label>
+            </fieldset>
+
+            <fieldset class="segmented-field family-line-field is-hidden" data-family-line-field aria-hidden="true">
+              <legend>家族割の対象回線</legend>
+              <div class="segmented-control">
+                <label>
+                  <input type="radio" name="mnp-family-line" value="first" data-key="familyLine" checked />
+                  <span>1回線目</span>
+                </label>
+                <label>
+                  <input type="radio" name="mnp-family-line" value="additional" data-key="familyLine" />
+                  <span>2回線目以降</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="segmented-field family-count-field is-hidden" data-family-count-field aria-hidden="true">
+              <legend>家族割の回線数</legend>
+              <div class="segmented-control">
+                <label>
+                  <input type="radio" name="mnp-family-count" value="one" data-key="familyGroupSize" />
+                  <span>1人</span>
+                </label>
+                <label>
+                  <input type="radio" name="mnp-family-count" value="two" data-key="familyGroupSize" />
+                  <span>2人</span>
+                </label>
+                <label>
+                  <input type="radio" name="mnp-family-count" value="three" data-key="familyGroupSize" checked />
+                  <span>3人以上</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="manual-discount-field">
+              <legend>実質負担調整</legend>
+              <div class="manual-discount-grid">
+                <label class="form-field">
+                  <span>月額マイナス額</span>
+                  <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="customDiscountMonthly" placeholder="例: 5000" />
+                </label>
+                <label class="form-field">
+                  <span>対象月数</span>
+                  <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="customDiscountMonths" data-format="months" placeholder="例: 6" />
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="segmented-field">
+              <legend>端末料金の支払い方法</legend>
+              <div class="segmented-control">
+                <label>
+                  <input type="radio" name="mnp-payment" value="lump" data-key="paymentType" />
+                  <span>一括</span>
+                </label>
+                <label>
+                  <input type="radio" name="mnp-payment" value="installment" data-key="paymentType" checked />
+                  <span>分割</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="payment-fields" data-payment-group="lump">
+              <label class="form-field">
+                <span>端末一括料金</span>
+                <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="deviceLump" placeholder="例: 65780" />
+              </label>
+            </div>
+
+            <div class="payment-fields" data-payment-group="installment">
+              <label class="form-field">
+                <span>前半24ヶ月の分割金 / 月</span>
+                <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="deviceFirst24" placeholder="例: 1200" />
+              </label>
+
+              <label class="form-field">
+                <span>25〜48ヶ月目の分割金 / 月</span>
+                <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="deviceAfter24" placeholder="例: 1200" />
+              </label>
+              <p class="field-note">備考: 返却で支払免除</p>
+            </div>
+
+            <label class="form-field">
+              <span>頭金</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="downPayment" placeholder="例: 0" />
+            </label>
+
+            <label class="form-field">
+              <span>プログラム利用料（返却時）</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="programFee" placeholder="例: 0" />
+            </label>
+
+            <label class="form-field">
+              <span>事務手数料</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="adminFee" placeholder="例: 3850" />
+            </label>
+
+            <label class="form-field">
+              <span>補償 / 月</span>
+              <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="warranty" placeholder="例: 990" />
+            </label>
+          </div>
+
+          <section class="result-block" aria-label="MNPの計算結果">
+            <div class="result-line primary">
+              <span>1〜24ヶ月目</span>
+              <strong data-output="monthlyFirst24">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>割引合計 / 月</span>
+              <strong data-output="discountTotal">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span data-output-label="effectiveMonthly">実質負担</span>
+              <strong data-output="effectiveMonthly">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>25〜48ヶ月目（継続時）</span>
+              <strong data-output="monthlyAfter24">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>初期・一括費用</span>
+              <strong data-output="initialCost">¥0</strong>
+            </div>
+            <div class="result-line">
+              <span>返却時費用</span>
+              <strong data-output="returnCost">¥0</strong>
+            </div>
+          </section>
+        </form>
+      </section>
+    </main>
+
+    <section class="print-sheet" id="print-sheet" aria-hidden="true"></section>
+
+    <section class="amount-keypad" id="amount-keypad" aria-hidden="true">
+      <div class="keypad-card" role="dialog" aria-label="数字入力パッド">
+        <header class="keypad-header">
+          <div>
+            <span id="keypad-field-label">金額入力</span>
+            <strong id="keypad-preview">¥0</strong>
+          </div>
+          <button type="button" class="keypad-done" data-keypad-action="done">完了</button>
+        </header>
+
+        <div class="keypad-grid">
+          <button type="button" data-keypad-value="7">7</button>
+          <button type="button" data-keypad-value="8">8</button>
+          <button type="button" data-keypad-value="9">9</button>
+          <button type="button" data-keypad-value="4">4</button>
+          <button type="button" data-keypad-value="5">5</button>
+          <button type="button" data-keypad-value="6">6</button>
+          <button type="button" data-keypad-value="1">1</button>
+          <button type="button" data-keypad-value="2">2</button>
+          <button type="button" data-keypad-value="3">3</button>
+          <button type="button" data-keypad-action="clear">C</button>
+          <button type="button" data-keypad-value="0">0</button>
+          <button type="button" data-keypad-action="backspace" aria-label="1文字削除">⌫</button>
+          <button type="button" class="wide-key" data-keypad-value="00">00</button>
+          <button type="button" class="wide-key accent-key" data-keypad-action="done">OK</button>
+        </div>
+      </div>
+    </section>
+
+    <script src="./data/plans.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

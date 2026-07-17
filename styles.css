@@ -209,19 +209,22 @@ h1 {
   gap: 12px;
 }
 
-.plan-picker {
+.plan-picker,
+.call-option-picker {
   display: grid;
   gap: 7px;
 }
 
-.plan-picker span {
+.plan-picker span,
+.call-option-picker span {
   color: var(--muted);
   font-size: 0.86rem;
   font-weight: 700;
   line-height: 1.35;
 }
 
-.plan-picker select {
+.plan-picker select,
+.call-option-picker select {
   width: 100%;
   min-height: 44px;
   border: 1px solid var(--line);
@@ -231,13 +234,15 @@ h1 {
   padding: 10px 12px;
 }
 
-.plan-picker select:focus {
+.plan-picker select:focus,
+.call-option-picker select:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
   outline: none;
 }
 
-.plan-picker-meta {
+.plan-picker-meta,
+.call-option-meta {
   margin: -1px 0 0;
   color: var(--muted);
   font-size: 0.78rem;

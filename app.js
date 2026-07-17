@@ -14,6 +14,7 @@ const defaultState = {
     familyDiscount: false,
     familyLine: "first",
     familyGroupSize: "three",
+    callOption: "standard",
     customDiscountMonthly: "",
     customDiscountMonths: "",
     device: "",
@@ -25,6 +26,7 @@ const defaultState = {
     familyDiscount: false,
     familyLine: "first",
     familyGroupSize: "three",
+    callOption: "standard",
     paymentType: "installment",
     deviceLump: "",
     deviceFirst24: "",
@@ -41,6 +43,7 @@ const defaultState = {
     familyDiscount: false,
     familyLine: "first",
     familyGroupSize: "three",
+    callOption: "standard",
     customDiscountMonthly: "",
     customDiscountMonths: "",
     paymentType: "installment",
@@ -73,6 +76,14 @@ const manualDiscounts = {
     label: "標準",
   },
 };
+const manualCallOptions = [
+  {
+    id: "standard",
+    label: "手入力",
+    amount: 0,
+    description: "通話料は基本料金に含めて入力してください。",
+  },
+];
 const familyGroupSizeLabels = {
   one: "1人",
   two: "2人",
@@ -199,6 +210,35 @@ function isFamilyDiscount(discount) {
 
 function getSelectedPlan(values) {
   return planCatalogMap.get(values.selectedBasePlan);
+}
+
+function getCallOptions(values) {
+  const selectedPlan = getSelectedPlan(values);
+  return selectedPlan?.callOptions?.length ? selectedPlan.callOptions : manualCallOptions;
+}
+
+function getCallOption(values) {
+  const options = getCallOptions(values);
+  return options.find((option) => option.id === values.callOption) ?? options[0] ?? manualCallOptions[0];
+}
+
+function getCallOptionMonthly(values) {
+  return Math.max(0, toNumber(getCallOption(values).amount));
+}
+
+function formatCallOptionAmount(option) {
+  const amount = Math.max(0, toNumber(option.amount));
+  return amount > 0 ? `+${formatYen(amount)}/月` : "追加なし";
+}
+
+function formatCallOptionOption(option) {
+  return `${option.label}（${formatCallOptionAmount(option)}）`;
+}
+
+function formatCallOptionSelection(values) {
+  const option = getCallOption(values);
+  const description = option.description ? ` / ${option.description}` : "";
+  return `${option.label} ${formatCallOptionAmount(option)}${description}`;
 }
 
 function isSetDiscountExclusivePlan(plan) {
@@ -357,13 +397,15 @@ function getEffectiveLabel(prefix, months) {
 
 function calculateCurrent(values) {
   const discountTotal = calculateBaseDiscount(values);
-  const monthly = calculateDiscountedBase(values) + toNumber(values.device);
+  const callOptionMonthly = getCallOptionMonthly(values);
+  const monthly = calculateDiscountedBase(values) + callOptionMonthly + toNumber(values.device);
   const customDiscount = calculateCustomDiscount(values);
   const effectiveMonthly = Math.max(0, monthly - customDiscount.monthly);
 
   return {
     monthly,
     discountTotal,
+    callOptionMonthly,
     customDiscountMonthly: customDiscount.monthly,
     customDiscountMonths: customDiscount.months,
     effectiveMonthly,
@@ -375,8 +417,9 @@ function calculateQuote(values) {
   const discountTotal = calculateBaseDiscount(values);
   const customDiscount = calculateCustomDiscount(values);
   const baseMonthly = calculateDiscountedBase(values);
+  const callOptionMonthly = getCallOptionMonthly(values);
   const warrantyMonthly = toNumber(values.warranty);
-  const commonMonthly = baseMonthly + warrantyMonthly;
+  const commonMonthly = baseMonthly + callOptionMonthly + warrantyMonthly;
   const isLump = values.paymentType === "lump";
   const firstDeviceMonthly = isLump ? 0 : toNumber(values.deviceFirst24);
   const afterDeviceMonthly = isLump ? 0 : toNumber(values.deviceAfter24);
@@ -398,6 +441,7 @@ function calculateQuote(values) {
     initialCost,
     returnCost,
     discountTotal,
+    callOptionMonthly,
     customDiscountMonthly: customDiscount.monthly,
     customDiscountMonths: customDiscount.months,
   };
@@ -450,6 +494,7 @@ function getBasePrintRows(values) {
   return [
     { label: "料金プラン", value: getSelectedPlanLabel(values) },
     { label: "基本料金 / 月", value: formatYenInput(values.base) },
+    { label: "通話オプション", value: formatCallOptionSelection(values) },
     { label: "ネット割", value: formatDiscountSelection(values, "netDiscount") },
     { label: "家族割", value: formatDiscountSelection(values, "familyDiscount") },
   ];
@@ -538,12 +583,14 @@ function renderPrintSheet() {
     createPrintCard("現在の利用状況", [...getBasePrintRows(state.current), ...getCustomDiscountPrintRows(state.current), { label: "端末料金 / 月", value: formatYenInput(state.current.device) }], [
       { label: "月額合計", value: formatYen(current.monthly), result: true },
       { label: "割引合計 / 月", value: formatDiscount(current.discountTotal), result: true },
+      { label: "通話オプション / 月", value: formatYen(current.callOptionMonthly), result: true },
       { label: getEffectiveLabel("実質負担", current.customDiscountMonths), value: formatYen(current.effectiveMonthly), result: true },
       { label: "24ヶ月合計", value: formatYen(current.total24), result: true },
     ]),
     createPrintCard("機種変更", getQuoteInputRows(state.change), [
       { label: "1〜24ヶ月目", value: formatYen(change.monthlyFirst24), result: true },
       { label: "割引合計 / 月", value: formatDiscount(change.discountTotal), result: true },
+      { label: "通話オプション / 月", value: formatYen(change.callOptionMonthly), result: true },
       { label: "実質負担", value: formatYen(change.effectiveMonthlyFirst24), result: true },
       { label: "25〜48ヶ月目（継続時）", value: formatYen(change.monthlyAfter24), result: true },
       { label: "初期・一括費用", value: formatYen(change.initialCost), result: true },
@@ -552,6 +599,7 @@ function renderPrintSheet() {
     createPrintCard("MNP", getQuoteInputRows(state.mnp), [
       { label: "1〜24ヶ月目", value: formatYen(mnp.monthlyFirst24), result: true },
       { label: "割引合計 / 月", value: formatDiscount(mnp.discountTotal), result: true },
+      { label: "通話オプション / 月", value: formatYen(mnp.callOptionMonthly), result: true },
       { label: getEffectiveLabel("実質負担", mnp.customDiscountMonths), value: formatYen(mnp.effectiveMonthlyFirst24), result: true },
       { label: "25〜48ヶ月目（継続時）", value: formatYen(mnp.monthlyAfter24), result: true },
       { label: "初期・一括費用", value: formatYen(mnp.initialCost), result: true },
@@ -618,6 +666,61 @@ function setupPlanSelectors() {
     picker.append(label, select, meta);
     baseField.before(picker);
   });
+}
+
+function setupCallOptionSelectors() {
+  panels.forEach((panel) => {
+    const baseInput = panel.querySelector('[data-key="base"]:not([type="radio"])');
+    const baseField = baseInput?.closest(".form-field");
+
+    if (!baseField) {
+      return;
+    }
+
+    const field = document.createElement("label");
+    field.className = "call-option-picker";
+
+    const label = document.createElement("span");
+    label.textContent = "通話オプション";
+
+    const select = document.createElement("select");
+    select.dataset.callOptionSelect = "";
+
+    const meta = document.createElement("p");
+    meta.className = "call-option-meta";
+    meta.dataset.callOptionMeta = "";
+
+    field.append(label, select, meta);
+    baseField.after(field);
+  });
+}
+
+function syncCallOptionSelector(panel) {
+  const plan = panel.dataset.plan;
+  const select = panel.querySelector("[data-call-option-select]");
+  const meta = panel.querySelector("[data-call-option-meta]");
+
+  if (!select || !meta) {
+    return;
+  }
+
+  const options = getCallOptions(state[plan]);
+  const currentIds = [...select.options].map((option) => option.value);
+  const nextIds = options.map((option) => option.id);
+  const shouldRebuild =
+    currentIds.length !== nextIds.length || currentIds.some((id, index) => id !== nextIds[index]);
+
+  if (shouldRebuild) {
+    select.replaceChildren(...options.map((option) => new Option(formatCallOptionOption(option), option.id)));
+  }
+
+  if (!options.some((option) => option.id === state[plan].callOption)) {
+    state[plan].callOption = options[0]?.id ?? "standard";
+  }
+
+  select.value = state[plan].callOption;
+  const selectedOption = getCallOption(state[plan]);
+  meta.textContent = selectedOption.description ?? "";
 }
 
 function updatePlanMeta(panel) {
@@ -739,6 +842,7 @@ function hydrateInputs() {
       updatePlanMeta(panel);
     }
 
+    syncCallOptionSelector(panel);
     syncDiscountOptions(panel);
     syncFamilyFields(panel);
     updatePaymentVisibility(panel, plan);
@@ -756,6 +860,7 @@ function updateResults() {
     if (plan === "current") {
       setOutput(panel, "monthly", current.monthly);
       setOutput(panel, "discountTotal", current.discountTotal, formatDiscount);
+      setOutput(panel, "callOptionMonthly", current.callOptionMonthly);
       setOutput(panel, "effectiveMonthly", current.effectiveMonthly);
       setOutputLabel(panel, "effectiveMonthly", getEffectiveLabel("実質負担", current.customDiscountMonths));
       setOutput(panel, "total24", current.total24);
@@ -766,6 +871,7 @@ function updateResults() {
 
     setOutput(panel, "monthlyFirst24", quote.monthlyFirst24);
     setOutput(panel, "discountTotal", quote.discountTotal, formatDiscount);
+    setOutput(panel, "callOptionMonthly", quote.callOptionMonthly);
     setOutput(panel, "effectiveMonthly", quote.effectiveMonthlyFirst24);
     setOutputLabel(panel, "effectiveMonthly", getEffectiveLabel("実質負担", quote.customDiscountMonths));
     setOutput(panel, "monthlyReturned", quote.monthlyReturned);
@@ -795,6 +901,7 @@ function handleInput(event) {
     }
 
     state[plan][key] = input.value;
+    syncCallOptionSelector(panel);
     syncDiscountOptions(panel);
     syncFamilyFields(panel);
     updatePaymentVisibility(panel, plan);
@@ -817,6 +924,7 @@ function handleInput(event) {
       if (planSelect) {
         planSelect.value = "";
         updatePlanMeta(panel);
+        syncCallOptionSelector(panel);
         syncDiscountOptions(panel);
         syncFamilyFields(panel);
       }
@@ -839,7 +947,9 @@ function handlePlanSelect(event) {
   const selectedPlan = planCatalogMap.get(select.value);
 
   state[plan].selectedBasePlan = select.value;
+  state[plan].callOption = "standard";
   updatePlanMeta(panel);
+  syncCallOptionSelector(panel);
   enforceDiscountRules(panel);
   syncDiscountOptions(panel);
   syncFamilyFields(panel);
@@ -860,6 +970,21 @@ function handlePlanSelect(event) {
   baseInput.value = String(selectedPlan.monthlyPrice);
   baseInput.dispatchEvent(new Event("input", { bubbles: true }));
   isApplyingSelectedPlan = false;
+}
+
+function handleCallOptionSelect(event) {
+  const select = event.target.closest("[data-call-option-select]");
+  if (!select) {
+    return;
+  }
+
+  const panel = select.closest("[data-plan]");
+  const plan = panel.dataset.plan;
+
+  state[plan].callOption = select.value;
+  syncCallOptionSelector(panel);
+  saveState();
+  updateResults();
 }
 
 function resetPlan(plan) {
@@ -968,6 +1093,7 @@ function handleKeypadPress(event) {
 document.addEventListener("input", handleInput);
 document.addEventListener("change", handleInput);
 document.addEventListener("change", handlePlanSelect);
+document.addEventListener("change", handleCallOptionSelect);
 document.addEventListener("focusin", (event) => {
   if (isAmountInput(event.target)) {
     openKeypad(event.target);
@@ -994,5 +1120,6 @@ document.querySelectorAll("[data-reset]").forEach((button) => {
 });
 
 setupPlanSelectors();
+setupCallOptionSelectors();
 hydrateInputs();
 updateResults();

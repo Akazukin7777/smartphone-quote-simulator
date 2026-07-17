@@ -1,6 +1,6 @@
 window.MOBILE_PLAN_DB = {
   "schemaVersion": 1,
-  "checkedAt": "2026-07-16",
+  "checkedAt": "2026-07-17",
   "currency": "JPY",
   "plans": [
     {
@@ -12,6 +12,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 5698,
       "dataAmount": "〜1GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "みんなドコモ割",
@@ -39,6 +59,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 6798,
       "dataAmount": "1GB超〜3GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "みんなドコモ割",
@@ -66,6 +106,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 8448,
       "dataAmount": "無制限",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "みんなドコモ割",
@@ -93,6 +153,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 11748,
       "dataAmount": "無制限",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "みんなドコモ割",
@@ -120,6 +200,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 2750,
       "dataAmount": "4GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "ドコモ光/home 5G セット割",
@@ -142,6 +242,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 3850,
       "dataAmount": "10GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "ドコモ光/home 5G セット割",
@@ -164,6 +284,20 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 2970,
       "dataAmount": "30GB",
       "call": "5分国内通話無料、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "5分国内通話無料込み、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": []
     },
     {
@@ -175,6 +309,20 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 4950,
       "dataAmount": "110GB",
       "call": "5分国内通話無料、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "5分国内通話無料込み、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": []
     },
     {
@@ -186,6 +334,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 8008,
       "dataAmount": "使い放題（200GB/月超で制御の場合あり）",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "家族割プラス",
@@ -213,6 +381,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 9328,
       "dataAmount": "使い放題（200GB/月超で制御の場合あり）",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "auスマートバリュー",
@@ -245,6 +433,32 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 4048,
       "dataAmount": "〜30GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "talk-pack-60",
+          "label": "通話パック60",
+          "amount": 660,
+          "description": "月間最大60分相当の国内通話を定額化"
+        },
+        {
+          "id": "ten-minute",
+          "label": "10分かけ放題",
+          "amount": 880,
+          "description": "1回10分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "自宅セット割",
@@ -272,6 +486,20 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 3828,
       "dataAmount": "35GB",
       "call": "10分以内国内通話かけ放題、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "10分以内国内通話かけ放題込み、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": []
     },
     {
@@ -283,6 +511,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 0,
       "dataAmount": "トッピング購入型",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 550,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1650,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": []
     },
     {
@@ -294,6 +542,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 10538,
       "dataAmount": "無制限",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "新みんな家族割",
@@ -321,6 +589,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 8008,
       "dataAmount": "無制限",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "新みんな家族割",
@@ -348,6 +636,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 5258,
       "dataAmount": "〜2GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "新みんな家族割",
@@ -375,6 +683,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 6358,
       "dataAmount": "〜5GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "新みんな家族割",
@@ -402,6 +730,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 990,
       "dataAmount": "〜3GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 550,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1650,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": []
     },
     {
@@ -413,6 +761,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 2090,
       "dataAmount": "〜10GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 550,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1650,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": []
     },
     {
@@ -424,6 +792,20 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 2970,
       "dataAmount": "30GB",
       "call": "5分国内通話定額付き、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "5分国内通話定額付き、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": []
     },
     {
@@ -435,6 +817,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 3278,
       "dataAmount": "5GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "ten-minute",
+          "label": "10分かけ放題",
+          "amount": 880,
+          "description": "1回10分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "PayPayカード割",
@@ -462,6 +864,26 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 4378,
       "dataAmount": "30GB",
       "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "ten-minute",
+          "label": "10分かけ放題",
+          "amount": 880,
+          "description": "1回10分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "PayPayカード割",
@@ -489,6 +911,20 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 5478,
       "dataAmount": "35GB",
       "call": "10分以内国内通話かけ放題、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "10分以内国内通話かけ放題込み、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
       "discounts": [
         {
           "name": "PayPayカード割",
@@ -516,6 +952,20 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 1078,
       "dataAmount": "〜3GB",
       "call": "Rakuten Link利用で国内通話無料、一部対象外あり",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "Rakuten Link利用で国内通話無料。一部対象外、標準電話アプリは22円/30秒"
+        },
+        {
+          "id": "fifteen-minute",
+          "label": "15分かけ放題",
+          "amount": 1100,
+          "description": "OS標準アプリで1回15分以内の国内通話無料"
+        }
+      ],
       "discounts": [
         {
           "name": "最強家族割",
@@ -533,6 +983,20 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 2178,
       "dataAmount": "3GB超〜20GB",
       "call": "Rakuten Link利用で国内通話無料、一部対象外あり",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "Rakuten Link利用で国内通話無料。一部対象外、標準電話アプリは22円/30秒"
+        },
+        {
+          "id": "fifteen-minute",
+          "label": "15分かけ放題",
+          "amount": 1100,
+          "description": "OS標準アプリで1回15分以内の国内通話無料"
+        }
+      ],
       "discounts": [
         {
           "name": "最強家族割",
@@ -550,6 +1014,20 @@ window.MOBILE_PLAN_DB = {
       "monthlyPrice": 3278,
       "dataAmount": "ギガ無制限",
       "call": "Rakuten Link利用で国内通話無料、一部対象外あり",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "Rakuten Link利用で国内通話無料。一部対象外、標準電話アプリは22円/30秒"
+        },
+        {
+          "id": "fifteen-minute",
+          "label": "15分かけ放題",
+          "amount": 1100,
+          "description": "OS標準アプリで1回15分以内の国内通話無料"
+        }
+      ],
       "discounts": [
         {
           "name": "最強家族割",

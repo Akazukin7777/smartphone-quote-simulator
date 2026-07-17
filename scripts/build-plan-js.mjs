@@ -16,6 +16,7 @@ const browserDb = {
     monthlyPrice: plan.monthlyPrice,
     dataAmount: plan.dataAmount,
     call: plan.call,
+    callOptions: plan.callOptions ?? [],
     discounts: plan.discounts,
   })),
 };

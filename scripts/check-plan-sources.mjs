@@ -3,17 +3,15 @@ import { readFile } from "node:fs/promises";
 const planDb = JSON.parse(await readFile(new URL("../data/plans.json", import.meta.url), "utf8"));
 const sourceMap = new Map();
 
-for (const provider of planDb.providers ?? []) {
-  for (const source of provider.sources ?? []) {
-    if (!source.url || !source.checks?.length) {
-      continue;
-    }
-
-    const entry = sourceMap.get(source.url) ?? { labels: new Set(), checks: new Set() };
-    entry.labels.add(`${provider.name}: ${source.label}`);
-    source.checks.forEach((check) => entry.checks.add(check));
-    sourceMap.set(source.url, entry);
+for (const plan of planDb.plans) {
+  if (!plan.sourceUrl || !plan.sourceChecks?.length) {
+    continue;
   }
+
+  const source = sourceMap.get(plan.sourceUrl) ?? { plans: [], checks: new Set() };
+  source.plans.push(plan.id);
+  plan.sourceChecks.forEach((check) => source.checks.add(check));
+  sourceMap.set(plan.sourceUrl, source);
 }
 
 const normalize = (text) => text.replace(/\s+/g, "");
@@ -21,11 +19,16 @@ let failed = 0;
 let warnings = 0;
 
 for (const [url, source] of sourceMap.entries()) {
+  if (url.endsWith(".pdf")) {
+    console.log(`SKIP PDF ${url}`);
+    continue;
+  }
+
   let response;
   try {
     response = await fetch(url, {
       headers: {
-        "user-agent": "internet-quote-plan-checker/1.0",
+        "user-agent": "mobile-quote-plan-checker/1.0",
       },
     });
   } catch (error) {
@@ -47,7 +50,7 @@ for (const [url, source] of sourceMap.entries()) {
   if (missing.length > 0) {
     failed += 1;
     console.error(`NG ${url}`);
-    console.error(`  sources: ${[...source.labels].join(", ")}`);
+    console.error(`  plans: ${source.plans.join(", ")}`);
     console.error(`  missing: ${missing.join(", ")}`);
     continue;
   }

@@ -1,5 +1,2 @@
 # Local Netlify folder
 .netlify
-
-# Local generated previews
-tmp/

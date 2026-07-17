@@ -1,1095 +1,1038 @@
-window.INTERNET_QUOTE_DB = {
-  "schemaVersion": 2,
+window.MOBILE_PLAN_DB = {
+  "schemaVersion": 1,
   "checkedAt": "2026-07-17",
   "currency": "JPY",
-  "product": "internet-1g-quote",
-  "homeTypes": {
-    "home": {
-      "label": "戸建て",
-      "description": "一戸建て、ファミリータイプ向け"
-    },
-    "mansion": {
-      "label": "マンション",
-      "description": "集合住宅、マンションタイプ向け"
-    }
-  },
-  "assumptions": [
-    "表示金額は税込の概算です。キャンペーン、代理店特典、スマホ側のセット割引、ポイント還元、日割り、ユニバーサルサービス料は含めていません。",
-    "工事費は代表例です。建物設備、エリア、品目変更、土日祝日工事、夜間工事、電話番号の引き継ぎ、テレビ台数により変動します。",
-    "月額ランニングコストは回線月額と選択オプションの合計です。工事費を分割払いにする場合は別途月々の請求が発生します。",
-    "加入電話番号を光電話へ引き継ぐ場合、見積もり内の光電話工事費とは別に、NTT東日本/NTT西日本から利用休止工事費などが請求される場合があります。",
-    "事業者変更では、切り替え先の契約/事業者変更手数料とは別に、移転元の光コラボ事業者から事業者変更手数料が請求される場合があります。見積もりでは最大目安3,300円を初期費用に加算しています。"
-  ],
-  "providers": [
+  "plans": [
     {
-      "id": "docomo",
-      "name": "ドコモ光",
-      "mark": "D",
-      "accent": "#d0182f",
-      "planName": "ドコモ光 1ギガ タイプA/C",
-      "contractLabel": "2年定期契約",
-      "description": "プロバイダ料金一体型の代表プランです。",
-      "monthly": {
-        "home": {
-          "label": "戸建て 1ギガ タイプA/C",
-          "regular": 5720,
-          "periods": [
-            {
-              "label": "通常月額",
-              "amount": 5720
-            }
-          ]
+      "id": "docomo-docomo-max-1gb",
+      "carrier": "docomo",
+      "brand": "docomo",
+      "planName": "ドコモ MAX",
+      "tierName": "〜1GB",
+      "monthlyPrice": 5698,
+      "dataAmount": "〜1GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
         },
-        "mansion": {
-          "label": "マンション 1ギガ タイプA/C",
-          "regular": 4400,
-          "periods": [
-            {
-              "label": "通常月額",
-              "amount": 4400
-            }
-          ]
-        }
-      },
-      "applications": {
-        "new": {
-          "label": "新規",
-          "description": "光回線を新しく引き込む場合の代表例です。",
-          "adminLabel": "契約事務手数料",
-          "adminFee": 4950,
-          "constructionOptions": [
-            {
-              "id": "dispatch",
-              "label": "派遣工事あり",
-              "amount": 28600,
-              "default": true,
-              "note": "戸建て・マンション共通の代表例",
-              "installment": {
-                "label": "回線工事費",
-                "monthly": 1191,
-                "months": 24
-              }
-            },
-            {
-              "id": "no-inside-wiring",
-              "label": "屋内配線新設なし",
-              "amount": 18260,
-              "note": "屋内配線を新たに設置しない場合"
-            },
-            {
-              "id": "no-dispatch",
-              "label": "派遣工事なし",
-              "amount": 3300,
-              "note": "無派遣で開通できる場合"
-            }
-          ]
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
         },
-        "providerChange": {
-          "label": "事業者変更",
-          "description": "他社光コラボからフレッツ光設備を使って切り替える場合です。",
-          "adminLabel": "契約事務手数料",
-          "adminFee": 4950,
-          "sourceProviderChangeFee": {
-            "label": "移転元の事業者変更手数料（最大目安）",
-            "amount": 3300,
-            "note": "現在利用中の光コラボ事業者側で請求される場合がある最大目安です。契約時期により無料の場合があります。解除料や工事費残債は別途確認してください。"
-          },
-          "constructionOptions": [
-            {
-              "id": "none",
-              "label": "工事不要",
-              "amount": 0,
-              "default": true,
-              "note": "速度変更や追加工事がない場合"
-            }
-          ]
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
         }
-      },
-      "options": {
-        "phone": {
-          "name": "ドコモ光電話",
-          "monthly": 550,
-          "initialCost": 0,
-          "note": "基本プラン。電話番号の扱いに応じて初期費用を選択してください。",
-          "initialOptions": [
-            {
-              "id": "newNumber",
-              "label": "新規発番",
-              "amount": 1100,
-              "applicationTypes": [
-                "new",
-                "providerChange"
-              ],
-              "defaultFor": [
-                "new"
-              ],
-              "note": "交換機等工事料（基本機能）を計上。光回線と同時申込時は光電話の基本工事料を適用しない代表例です。"
-            },
-            {
-              "id": "numberPortability",
-              "label": "番号引き継ぎ",
-              "amount": 3300,
-              "applicationTypes": [
-                "new",
-                "providerChange"
-              ],
-              "note": "交換機等工事料1,100円 + 同番移行2,200円。加入電話の利用休止工事料はNTT東西から別途請求される場合があります。"
-            },
-            {
-              "id": "providerChangePortability",
-              "label": "事業者変更で引き継ぎ",
-              "amount": 0,
-              "applicationTypes": [
-                "providerChange"
-              ],
-              "defaultFor": [
-                "providerChange"
-              ],
-              "note": "他社光コラボのひかり電話番号を事業者変更で継続する代表例。オプション変更や品目変更を伴う場合は別途確認してください。"
-            }
-          ]
-        },
-        "tv": {
-          "name": "ドコモ光テレビオプション",
-          "monthly": 990,
-          "note": "テレビ視聴サービス利用料を含む月額です。NHK受信料や有料BS、スカパー料金は含みません。",
-          "initialOptions": [
-            {
-              "id": "same-day-one-tv",
-              "label": "回線工事と同時 / テレビ1台",
-              "amount": 13530,
-              "default": true,
-              "defaultFor": [
-                "new"
-              ],
-              "note": "基本工事料、テレビ接続工事料、登録料の代表例"
-            },
-            {
-              "id": "same-day-multi-tv",
-              "label": "回線工事と同時 / テレビ2-4台",
-              "amount": 31460,
-              "note": "共聴設備接続を含む代表例"
-            },
-            {
-              "id": "tv-only-one-tv",
-              "label": "テレビのみ追加 / テレビ1台",
-              "amount": 23980,
-              "defaultFor": [
-                "providerChange"
-              ],
-              "note": "回線工事と別に追加する場合"
-            },
-            {
-              "id": "already-using",
-              "label": "既に光テレビ利用中",
-              "amount": 0,
-              "note": "工事不要として扱う場合"
-            }
-          ]
-        }
-      },
-      "notes": [
-        "ドコモ光はタイプA/Cの2年定期契約を代表プランとして登録しています。",
-        "単独タイプやタイプB、定期契約なしは料金が異なります。"
       ],
-      "importantNotices": [
-        "施策適用条件として1年以上のご利用が必須です。1年以内にご解約された際には、キャンペーン内容の回収（ポイント減算、カード請求）をさせていただきます。"
-      ],
-      "sources": [
+      "discounts": [
         {
-          "label": "ドコモ光 料金プラン",
-          "url": "https://www.docomo.ne.jp/internet/hikari/charge/?icid=CRP_INT_hikari_01_to_CRP_INT_hikari_charge",
-          "checks": [
-            "1ギガ タイプAC",
-            "5,720円",
-            "4,400円",
-            "契約事務手数料4,950円",
-            "28,600円"
-          ]
+          "name": "みんなドコモ割",
+          "amount": -1210,
+          "condition": "1回線:0円、2回線:-550円、3回線以上:-1210円"
         },
         {
-          "label": "ドコモ光 工事料分割払い",
-          "url": "https://www.docomo.ne.jp/internet/hikari/construction_costs/",
-          "checks": [
-            "一括お支払額（税込）：28,600円",
-            "派遣工事なしの場合、工事料は3,300円"
-          ]
+          "name": "ドコモ光/home 5G セット割",
+          "amount": -1210,
+          "condition": "対象固定回線契約あり"
         },
         {
-          "label": "ドコモ光 事業者変更",
-          "url": "https://www.docomo.ne.jp/internet/hikari/collabo_change/?icid=CRP_INT_hikari_to_CRP_INT_hikari_collabo_change",
-          "checks": [
-            "工事料不要",
-            "契約事務手数料4,950円"
-          ]
-        },
-        {
-          "label": "ドコモ光から他社への事業者変更",
-          "url": "https://www.docomo.ne.jp/internet/hikari/procedure/switching/",
-          "checks": [
-            "事業者変更事務手数料：3,300円"
-          ]
-        },
-        {
-          "label": "ドコモ光電話 料金",
-          "url": "https://www.docomo.ne.jp/internet/hikari/tell_service/charge/index.html?icid=CRP_HIKARI_charge_to_CRP_HIKARI_tell_service",
-          "checks": [
-            "ドコモ光電話",
-            "550円"
-          ]
-        },
-        {
-          "label": "ドコモ光電話 工事料",
-          "url": "https://www.docomo.ne.jp/binary/pdf/internet/hikari/tell_service/initial_cost/construction_charge_01.pdf?ver=1706749234",
-          "checks": []
-        },
-        {
-          "label": "ドコモ光 事業者変更",
-          "url": "https://www.docomo.ne.jp/internet/hikari/collabo_change/",
-          "checks": [
-            "工事料不要",
-            "ご自宅の電話番号がそのまま使える"
-          ]
-        },
-        {
-          "label": "ドコモ光テレビオプション",
-          "url": "https://www.docomo.ne.jp/internet/hikari/eizo_service/tv_option/",
-          "checks": [
-            "月額使用料：990円",
-            "合計 13,530円"
-          ]
+          "name": "dカードお支払割",
+          "amount": -220,
+          "condition": "dカードの場合。カード種別により金額差あり"
         }
       ]
     },
     {
-      "id": "nifty",
-      "name": "@nifty光",
-      "mark": "N",
-      "accent": "#0f766e",
-      "planName": "@nifty光 1ギガ 2年/3年プラン(N)",
-      "contractLabel": "2年/3年プラン",
-      "description": "ニフティの光コラボ1ギガプランです。",
-      "monthly": {
-        "home": {
-          "label": "ホームタイプ 1ギガ",
-          "regular": 5720,
-          "periods": [
-            {
-              "label": "開通月",
-              "amount": 0,
-              "note": "月額料金"
-            },
-            {
-              "label": "2-21か月目",
-              "amount": 4620,
-              "note": "Web掲載特典適用時"
-            },
-            {
-              "label": "22か月目以降",
-              "amount": 5720
-            }
-          ]
-        },
-        "mansion": {
-          "label": "マンションタイプ 1ギガ",
-          "regular": 4378,
-          "periods": [
-            {
-              "label": "開通月",
-              "amount": 0,
-              "note": "月額料金"
-            },
-            {
-              "label": "2-21か月目",
-              "amount": 3278,
-              "note": "Web掲載特典適用時"
-            },
-            {
-              "label": "22か月目以降",
-              "amount": 4378
-            }
-          ]
-        }
-      },
-      "contractTerms": [
+      "id": "docomo-docomo-max-3gb",
+      "carrier": "docomo",
+      "brand": "docomo",
+      "planName": "ドコモ MAX",
+      "tierName": "1GB超〜3GB",
+      "monthlyPrice": 6798,
+      "dataAmount": "1GB超〜3GB",
+      "call": "22円/30秒",
+      "callOptions": [
         {
-          "id": "threeYear",
-          "label": "3年プラン(N)",
-          "default": true,
-          "note": "ノジマ BB挑戦パック適用時の3年自動更新プラン料金です。",
-          "monthly": {
-            "new": {
-              "home": {
-                "label": "ホームタイプ 1ギガ 3年プラン(N)",
-                "regular": 5720,
-                "quoteAmount": 4620,
-                "quoteLabel": "2-21カ月目",
-                "quoteNote": "ノジマ BB挑戦パック適用時。22-37カ月目は5,280円、38カ月目以降は5,720円/月です。",
-                "summary": "新規: 開通月0円、2-21カ月目4,620円、22-37カ月目5,280円",
-                "periods": [
-                  {
-                    "label": "開通月",
-                    "amount": 0,
-                    "note": "月額料金"
-                  },
-                  {
-                    "label": "2-21カ月目",
-                    "amount": 4620,
-                    "note": "ノジマ BB挑戦パック適用時"
-                  },
-                  {
-                    "label": "22-37カ月目",
-                    "amount": 5280,
-                    "note": "ノジマ BB挑戦パック適用時"
-                  },
-                  {
-                    "label": "38カ月目以降",
-                    "amount": 5720
-                  }
-                ]
-              },
-              "mansion": {
-                "label": "マンションタイプ 1ギガ 3年プラン(N)",
-                "regular": 4378,
-                "quoteAmount": 3278,
-                "quoteLabel": "2-21カ月目",
-                "quoteNote": "ノジマ BB挑戦パック適用時。22-37カ月目は4,268円、38カ月目以降は4,378円/月です。",
-                "summary": "新規: 開通月0円、2-21カ月目3,278円、22-37カ月目4,268円",
-                "periods": [
-                  {
-                    "label": "開通月",
-                    "amount": 0,
-                    "note": "月額料金"
-                  },
-                  {
-                    "label": "2-21カ月目",
-                    "amount": 3278,
-                    "note": "ノジマ BB挑戦パック適用時"
-                  },
-                  {
-                    "label": "22-37カ月目",
-                    "amount": 4268,
-                    "note": "ノジマ BB挑戦パック適用時"
-                  },
-                  {
-                    "label": "38カ月目以降",
-                    "amount": 4378
-                  }
-                ]
-              }
-            },
-            "providerChange": {
-              "home": {
-                "label": "ホームタイプ 1ギガ 3年プラン(N)",
-                "regular": 5720,
-                "quoteAmount": 5225,
-                "quoteLabel": "2-37カ月目",
-                "quoteNote": "ノジマ BB挑戦パック適用時。38カ月目以降は5,720円/月です。",
-                "summary": "事業者変更: 開通月0円、2-37カ月目5,225円、38カ月目以降5,720円",
-                "periods": [
-                  {
-                    "label": "開通月",
-                    "amount": 0,
-                    "note": "月額料金"
-                  },
-                  {
-                    "label": "2-37カ月目",
-                    "amount": 5225,
-                    "note": "ノジマ BB挑戦パック適用時"
-                  },
-                  {
-                    "label": "38カ月目以降",
-                    "amount": 5720
-                  }
-                ]
-              },
-              "mansion": {
-                "label": "マンションタイプ 1ギガ 3年プラン(N)",
-                "regular": 4378,
-                "quoteAmount": 3960,
-                "quoteLabel": "2-37カ月目",
-                "quoteNote": "ノジマ BB挑戦パック適用時。38カ月目以降は4,378円/月です。",
-                "summary": "事業者変更: 開通月0円、2-37カ月目3,960円、38カ月目以降4,378円",
-                "periods": [
-                  {
-                    "label": "開通月",
-                    "amount": 0,
-                    "note": "月額料金"
-                  },
-                  {
-                    "label": "2-37カ月目",
-                    "amount": 3960,
-                    "note": "ノジマ BB挑戦パック適用時"
-                  },
-                  {
-                    "label": "38カ月目以降",
-                    "amount": 4378
-                  }
-                ]
-              }
-            }
-          }
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
         },
         {
-          "id": "twoYear",
-          "label": "2年プラン(N)",
-          "note": "新規は3年プラン(N)と同じ月額割引です。事業者変更は2-25カ月目の段階割引を反映します。",
-          "monthly": {
-            "new": {
-              "home": {
-                "label": "ホームタイプ 1ギガ 2年プラン(N)",
-                "regular": 5720,
-                "quoteAmount": 4620,
-                "quoteLabel": "2-21カ月目",
-                "quoteNote": "Web掲載特典の月額割引適用時。22カ月目以降は5,720円/月です。",
-                "summary": "新規: 開通月0円、2-21カ月目4,620円、22カ月目以降5,720円",
-                "periods": [
-                  {
-                    "label": "開通月",
-                    "amount": 0,
-                    "note": "月額料金"
-                  },
-                  {
-                    "label": "2-21カ月目",
-                    "amount": 4620,
-                    "note": "Web掲載特典適用時"
-                  },
-                  {
-                    "label": "22カ月目以降",
-                    "amount": 5720
-                  }
-                ]
-              },
-              "mansion": {
-                "label": "マンションタイプ 1ギガ 2年プラン(N)",
-                "regular": 4378,
-                "quoteAmount": 3278,
-                "quoteLabel": "2-21カ月目",
-                "quoteNote": "Web掲載特典の月額割引適用時。22カ月目以降は4,378円/月です。",
-                "summary": "新規: 開通月0円、2-21カ月目3,278円、22カ月目以降4,378円",
-                "periods": [
-                  {
-                    "label": "開通月",
-                    "amount": 0,
-                    "note": "月額料金"
-                  },
-                  {
-                    "label": "2-21カ月目",
-                    "amount": 3278,
-                    "note": "Web掲載特典適用時"
-                  },
-                  {
-                    "label": "22カ月目以降",
-                    "amount": 4378
-                  }
-                ]
-              }
-            },
-            "providerChange": {
-              "home": {
-                "label": "ホームタイプ 1ギガ 2年プラン(N)",
-                "regular": 5720,
-                "quoteAmount": 5390,
-                "quoteLabel": "2-7カ月目",
-                "quoteNote": "事業者変更の2年プラン(N)月額割引適用時。8-13カ月目は5,170円、14-25カ月目は4,950円、26カ月目以降は5,720円/月です。",
-                "summary": "事業者変更: 2-7カ月目5,390円、8-13カ月目5,170円、14-25カ月目4,950円",
-                "periods": [
-                  {
-                    "label": "開通月",
-                    "amount": 0,
-                    "note": "月額料金"
-                  },
-                  {
-                    "label": "2-7カ月目",
-                    "amount": 5390,
-                    "note": "2年プラン(N)月額割引適用時"
-                  },
-                  {
-                    "label": "8-13カ月目",
-                    "amount": 5170,
-                    "note": "2年プラン(N)月額割引適用時"
-                  },
-                  {
-                    "label": "14-25カ月目",
-                    "amount": 4950,
-                    "note": "2年プラン(N)月額割引適用時"
-                  },
-                  {
-                    "label": "26カ月目以降",
-                    "amount": 5720
-                  }
-                ]
-              },
-              "mansion": {
-                "label": "マンションタイプ 1ギガ 2年プラン(N)",
-                "regular": 4378,
-                "quoteAmount": 4048,
-                "quoteLabel": "2-7カ月目",
-                "quoteNote": "事業者変更の2年プラン(N)月額割引適用時。8-13カ月目は3,828円、14-25カ月目は3,608円、26カ月目以降は4,378円/月です。",
-                "summary": "事業者変更: 2-7カ月目4,048円、8-13カ月目3,828円、14-25カ月目3,608円",
-                "periods": [
-                  {
-                    "label": "開通月",
-                    "amount": 0,
-                    "note": "月額料金"
-                  },
-                  {
-                    "label": "2-7カ月目",
-                    "amount": 4048,
-                    "note": "2年プラン(N)月額割引適用時"
-                  },
-                  {
-                    "label": "8-13カ月目",
-                    "amount": 3828,
-                    "note": "2年プラン(N)月額割引適用時"
-                  },
-                  {
-                    "label": "14-25カ月目",
-                    "amount": 3608,
-                    "note": "2年プラン(N)月額割引適用時"
-                  },
-                  {
-                    "label": "26カ月目以降",
-                    "amount": 4378
-                  }
-                ]
-              }
-            }
-          }
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
         }
       ],
-      "applications": {
-        "new": {
-          "label": "新規",
-          "description": "光回線を新しく引き込む場合の代表例です。",
-          "adminLabel": "回線契約料",
-          "adminFee": 3300,
-          "constructionOptions": [
-            {
-              "id": "standard",
-              "label": "代表的な回線工事",
-              "amount": 22000,
-              "default": true,
-              "note": "税込1,100円×20回払いの総額",
-              "installment": {
-                "label": "回線工事費",
-                "monthly": 1100,
-                "months": 20
-              }
-            },
-            {
-              "id": "manual-check",
-              "label": "工事費は別途確認",
-              "amount": 0,
-              "note": "設備状況により異なるため別途入力欄で調整"
-            }
-          ]
-        },
-        "providerChange": {
-          "label": "事業者変更",
-          "description": "他社光コラボから@nifty光へ切り替える場合です。",
-          "adminLabel": "事業者変更手数料",
-          "adminFee": 3300,
-          "sourceProviderChangeFee": {
-            "label": "移転元の事業者変更手数料（最大目安）",
-            "amount": 3300,
-            "note": "現在利用中の光コラボ事業者側で請求される場合がある最大目安です。契約時期により無料の場合があります。解除料や工事費残債は別途確認してください。"
-          },
-          "constructionOptions": [
-            {
-              "id": "none",
-              "label": "工事不要",
-              "amount": 0,
-              "default": true,
-              "note": "品目変更がない場合"
-            }
-          ]
-        }
-      },
-      "initialRequiredOptions": [
+      "discounts": [
         {
-          "name": "@nifty 優待サービス",
-          "amount": 550,
-          "note": "初期加入オプションとして初期費用に計上"
+          "name": "みんなドコモ割",
+          "amount": -1210,
+          "condition": "1回線:0円、2回線:-550円、3回線以上:-1210円"
         },
         {
-          "name": "@nifty セキュアプライバシー",
-          "amount": 440,
-          "note": "初期加入オプションとして初期費用に計上"
+          "name": "ドコモ光/home 5G セット割",
+          "amount": -1210,
+          "condition": "対象固定回線契約あり"
         },
         {
-          "name": "@niftyまかせて365",
-          "amount": 550,
-          "note": "初期加入オプションとして初期費用に計上"
-        }
-      ],
-      "options": {
-        "phone": {
-          "name": "@nifty光電話",
-          "monthly": 550,
-          "initialCost": 0,
-          "note": "基本プラン。電話番号の扱いに応じて初期費用を選択してください。",
-          "initialOptions": [
-            {
-              "id": "newNumber",
-              "label": "新規発番",
-              "amountByApplication": {
-                "new": 1100,
-                "providerChange": 3300
-              },
-              "applicationTypes": [
-                "new",
-                "providerChange"
-              ],
-              "defaultFor": [
-                "new"
-              ],
-              "note": "新規は光回線同時工事の交換機等工事費のみ。事業者変更時に光電話を新規追加する場合は無派遣の基本工事費2,200円を含めた代表例です。"
-            },
-            {
-              "id": "numberPortability",
-              "label": "番号引き継ぎ",
-              "amountByApplication": {
-                "new": 3300,
-                "providerChange": 5500
-              },
-              "applicationTypes": [
-                "new",
-                "providerChange"
-              ],
-              "note": "新規は交換機等工事費1,100円 + 同番移行2,200円。事業者変更時に光電話を新規追加する場合は無派遣の基本工事費2,200円も含めます。NTT東西の利用休止工事費は別途の場合があります。"
-            },
-            {
-              "id": "providerChangePortability",
-              "label": "事業者変更で引き継ぎ",
-              "amount": 0,
-              "applicationTypes": [
-                "providerChange"
-              ],
-              "defaultFor": [
-                "providerChange"
-              ],
-              "note": "他社光コラボで光電話を利用中の場合、事業者変更で@nifty光電話へ切り替わる代表例です。"
-            }
-          ]
-        },
-        "tv": {
-          "name": "@nifty光テレビ",
-          "monthly": 990,
-          "note": "月額利用料495円とテレビ視聴サービス利用料495円の合計です。",
-          "initialOptions": [
-            {
-              "id": "self-connect",
-              "label": "テレビ接続工事なし",
-              "amount": 14630,
-              "note": "登録料3,080円 + 光テレビ工事料11,550円"
-            },
-            {
-              "id": "one-tv",
-              "label": "テレビ1台接続",
-              "amount": 21780,
-              "default": true,
-              "note": "登録料、光テレビ工事料、テレビ1台接続工事"
-            },
-            {
-              "id": "multi-tv",
-              "label": "テレビ2-4台接続",
-              "amount": 39710,
-              "note": "共聴設備接続を含む代表例"
-            },
-            {
-              "id": "already-using",
-              "label": "フレッツ・テレビ等を利用中",
-              "amount": 2200,
-              "defaultFor": [
-                "providerChange"
-              ],
-              "note": "乗り換え手数料のみの想定"
-            }
-          ]
-        }
-      },
-      "notes": [
-        "@nifty光は2年プラン(N)と3年プラン(N)を選択できます。月額ランニングコストは選択プランの代表的な割引適用月額で計算します。",
-        "新規3年プラン(N)は2-21カ月目、22-37カ月目、38カ月目以降の段階月額を反映しています。",
-        "事業者変更3年プラン(N)は2-37カ月目のノジマ割引月額を反映しています。2年プラン(N)は公式Web掲載の段階割引を登録しています。",
-        "初期加入オプション（@nifty 優待サービス、@nifty セキュアプライバシー、@niftyまかせて365）の合計1,540円を初期費用に加算しています。"
-      ],
-      "importantNotices": [
-        "施策適用条件として1年以上のご利用が必須です。1年以内にご解約された際には、キャンペーン内容の回収（ポイント減算、カード請求）をさせていただきます。"
-      ],
-      "sources": [
-        {
-          "label": "@nifty光 料金",
-          "url": "https://setsuzoku.nifty.com/niftyhikari/price/",
-          "checks": [
-            "4,200円(税込4,620円)",
-            "5,200円(税込5,720円)",
-            "3,980円(税込4,378円)",
-            "回線契約料3,000円(税込3,300)円"
-          ]
-        },
-        {
-          "label": "@nifty光 事業者変更",
-          "url": "https://setsuzoku.nifty.com/niftyhikari/price/index_j/",
-          "checks": [
-            "事業者変更手数料3,000円",
-            "5,390円",
-            "4,048円",
-            "14～25カ月目"
-          ]
-        },
-        {
-          "label": "@nifty光 事業者変更承諾番号",
-          "url": "https://faq.support.nifty.com/3867",
-          "checks": [
-            "事業者変更（解除）手数料",
-            "3,300円（税込）"
-          ]
-        },
-        {
-          "label": "@nifty光 会員サービス",
-          "url": "https://setsuzoku.nifty.com/niftyhikari/service/upsell/",
-          "checks": [
-            "7台で400円(税込440円)/月",
-            "500円(税込550円)/月"
-          ]
-        },
-        {
-          "label": "@niftyまかせて365 料金FAQ",
-          "url": "https://faq.support.nifty.com/4410",
-          "checks": [
-            "月額料金550円（税込）/ 月"
-          ]
-        },
-        {
-          "label": "@nifty光電話",
-          "url": "https://csoption.nifty.com/hikari_denwa/",
-          "checks": [
-            "基本プラン",
-            "税込 550",
-            "同番移行"
-          ]
-        },
-        {
-          "label": "@nifty光電話 工事費（光回線同時）",
-          "url": "https://setsuzoku.nifty.com/niftyhikari/pdf/kouji_denwa_douji.pdf",
-          "checks": []
-        },
-        {
-          "label": "@nifty光電話（事業者変更）",
-          "url": "https://setsuzoku.nifty.com/niftyhikari/service/hikaridenwa/index_j/",
-          "checks": [
-            "乗り換え手数料",
-            "0円",
-            "同番移行工事費"
-          ]
-        },
-        {
-          "label": "@nifty光テレビ",
-          "url": "https://csoption.nifty.com/hikari_tv/",
-          "checks": [
-            "月額利用料",
-            "税込 495円/月",
-            "テレビ視聴サービス登録料",
-            "3,080円"
-          ]
+          "name": "dカードお支払割",
+          "amount": -220,
+          "condition": "dカードの場合。カード種別により金額差あり"
         }
       ]
     },
     {
-      "id": "softbank",
-      "name": "SoftBank 光",
-      "mark": "S",
-      "accent": "#5b5f97",
-      "planName": "SoftBank 光 1ギガ",
-      "contractLabel": "2年自動更新",
-      "description": "SoftBank 光の1ギガ標準プランです。",
-      "monthly": {
-        "home": {
-          "label": "ファミリー 1ギガ",
-          "regular": 5720,
-          "periods": [
-            {
-              "label": "通常月額",
-              "amount": 5720
-            }
-          ]
+      "id": "docomo-docomo-max-unlimited",
+      "carrier": "docomo",
+      "brand": "docomo",
+      "planName": "ドコモ MAX",
+      "tierName": "無制限",
+      "monthlyPrice": 8448,
+      "dataAmount": "無制限",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
         },
-        "mansion": {
-          "label": "マンション 1ギガ",
-          "regular": 4180,
-          "periods": [
-            {
-              "label": "通常月額",
-              "amount": 4180
-            }
-          ]
-        }
-      },
-      "applications": {
-        "new": {
-          "label": "新規",
-          "description": "光回線を新しく引き込む場合の代表例です。",
-          "adminLabel": "契約事務手数料",
-          "adminFee": 4950,
-          "constructionOptions": [
-            {
-              "id": "dispatch",
-              "label": "立ち会い工事あり",
-              "amount": 47520,
-              "default": true,
-              "note": "2026年6月1日以降申込分の代表例",
-              "installment": {
-                "label": "回線工事費",
-                "monthly": 1980,
-                "months": 24
-              }
-            },
-            {
-              "id": "no-dispatch",
-              "label": "立ち会い工事なし",
-              "amount": 5280,
-              "note": "光ファイバー導入済みマンションなど"
-            }
-          ]
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
         },
-        "providerChange": {
-          "label": "事業者変更",
-          "description": "フレッツ光または他社光コラボから切り替える場合です。",
-          "adminLabel": "契約事務手数料",
-          "adminFee": 4950,
-          "sourceProviderChangeFee": {
-            "label": "移転元の事業者変更手数料（最大目安）",
-            "amount": 3300,
-            "note": "現在利用中の光コラボ事業者側で請求される場合がある最大目安です。契約時期により無料の場合があります。解除料や工事費残債は別途確認してください。"
-          },
-          "constructionOptions": [
-            {
-              "id": "none",
-              "label": "工事不要",
-              "amount": 0,
-              "default": true,
-              "note": "転用/事業者変更手続きで工事不要の場合"
-            }
-          ]
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
         }
-      },
-      "options": {
-        "phone": {
-          "name": "固定電話サービス",
-          "monthly": 550,
-          "initialCost": 0,
-          "note": "光電話（N）またはBBフォンを選択してください。",
-          "services": [
-            {
-              "id": "hikaridenwaN",
-              "name": "光電話（N）基本プラン",
-              "monthly": 550,
-              "ouchiWariMonthly": 550,
-              "ouchiWariLabel": "おうち割指定オプション（光電話（N）＋BBフォン）",
-              "ouchiWariNote": "SoftBank 光・1ギガのおうち割 光セット指定オプションとして、光電話（N）基本プラン + BBフォン + Wi-Fiマルチパック + 光BBユニットレンタルのセット料金で計算します。スマホ側の割引額は月額ランニングコストには含めません。",
-              "default": true,
-              "note": "0AB-J番号を使う固定電話サービスです。電話番号の扱いに応じて初期費用を選択してください。",
-              "initialOptions": [
-                {
-                  "id": "newNumber",
-                  "label": "新規発番",
-                  "amount": 1100,
-                  "applicationTypes": [
-                    "new",
-                    "providerChange"
-                  ],
-                  "defaultFor": [
-                    "new"
-                  ],
-                  "note": "交換機等工事費（基本機能）を計上。SoftBank 光と同時工事の場合は光電話（N）の基本工事費が減額される代表例です。"
-                },
-                {
-                  "id": "numberPortability",
-                  "label": "番号引き継ぎ",
-                  "amount": 3300,
-                  "applicationTypes": [
-                    "new",
-                    "providerChange"
-                  ],
-                  "note": "交換機等工事費1,100円 + 同番移行工事2,200円。NTT加入電話等の利用休止工事費は別途請求される場合があります。"
-                },
-                {
-                  "id": "providerChangePortability",
-                  "label": "事業者変更で引き継ぎ",
-                  "amount": 0,
-                  "applicationTypes": [
-                    "providerChange"
-                  ],
-                  "defaultFor": [
-                    "providerChange"
-                  ],
-                  "note": "現在のNTT東西ひかり電話や他社光コラボの電話番号を継続する代表例。品目変更や機器変更を伴う場合は別途確認してください。"
-                }
-              ]
-            },
-            {
-              "id": "bbPhone",
-              "name": "BBフォン（光BBユニットレンタル含む）",
-              "monthly": 513,
-              "ouchiWariMonthly": 550,
-              "ouchiWariLabel": "おうち割指定オプション（BBフォン）",
-              "ouchiWariNote": "SoftBank 光・1ギガのおうち割 光セット指定オプションとして、BBフォン + Wi-Fiマルチパック + 光BBユニットレンタルのセット料金で計算します。スマホ側の割引額は月額ランニングコストには含めません。",
-              "note": "BBフォンは050番号のIP電話です。利用には光BBユニットレンタルが必要です。",
-              "initialOptions": [
-                {
-                  "id": "bbPhone050",
-                  "label": "050番号発番",
-                  "amount": 0,
-                  "default": true,
-                  "applicationTypes": [
-                    "new",
-                    "providerChange"
-                  ],
-                  "defaultFor": [
-                    "new",
-                    "providerChange"
-                  ],
-                  "note": "BBフォンの050番号は契約ごとに自動付与される代表例です。月額費用は通常オプションまたはおうち割指定オプションの選択に応じて計上します。"
-                }
-              ]
-            }
-          ]
-        },
-        "tv": {
-          "name": "ソフトバンク光テレビ",
-          "monthly": 990,
-          "note": "テレビ伝送サービス利用料495円とテレビ視聴サービス利用料495円の合計です。",
-          "initialOptions": [
-            {
-              "id": "same-day-one-tv",
-              "label": "回線工事と同時 / テレビ1台",
-              "amount": 16280,
-              "default": true,
-              "defaultFor": [
-                "new"
-              ],
-              "note": "登録料3,080円 + 1台かつ共聴工事なし13,200円"
-            },
-            {
-              "id": "same-day-common",
-              "label": "回線工事と同時 / 共聴工事あり",
-              "amount": 32780,
-              "note": "登録料3,080円 + 回線同時工事29,700円"
-            },
-            {
-              "id": "tv-only-one-tv",
-              "label": "テレビ単独工事 / テレビ1台",
-              "amount": 24530,
-              "defaultFor": [
-                "providerChange"
-              ],
-              "note": "登録料3,080円 + 単独工事21,450円"
-            },
-            {
-              "id": "tv-only-common",
-              "label": "テレビ単独工事 / 共聴工事あり",
-              "amount": 41030,
-              "note": "登録料3,080円 + 単独工事37,950円"
-            },
-            {
-              "id": "already-using",
-              "label": "既に光テレビ利用中",
-              "amount": 0,
-              "note": "工事不要として扱う場合"
-            }
-          ]
-        }
-      },
-      "notes": [
-        "SoftBank 光は1ギガの2年自動更新プランを代表プランとして登録しています。",
-        "2026年6月1日以降申込分の工事費を登録しています。",
-        "BBフォンは050番号のIP電話として登録し、通常オプションでは必須となる光BBユニットレンタル513円/月を月額費用に加算します。",
-        "おうち割 光セット指定オプションを選択した場合、SoftBank 光・1ギガのセット料金としてBBフォン構成は550円/月で計算します。スマホ側の割引額は月額ランニングコストには含めません。"
       ],
-      "sources": [
+      "discounts": [
         {
-          "label": "SoftBank 光 料金",
-          "url": "https://www.softbank.jp/internet/sbhikari/price/",
-          "checks": [
-            "2年自動更新プラン※3 5,720円",
-            "2年自動更新プラン※3 4,180円",
-            "契約事務手数料 4,950円",
-            "47,520円",
-            "0円（工事不要）"
-          ]
+          "name": "みんなドコモ割",
+          "amount": -1210,
+          "condition": "1回線:0円、2回線:-550円、3回線以上:-1210円"
         },
         {
-          "label": "おうち割 光セット オプションセット料金",
-          "url": "https://www.softbank.jp/support/faq/view/20193",
-          "checks": [
-            "SoftBank 光・1ギガ",
-            "セット料金",
-            "550円",
-            "BBフォン"
-          ]
+          "name": "ドコモ光/home 5G セット割",
+          "amount": -1210,
+          "condition": "対象固定回線契約あり"
         },
         {
-          "label": "光電話（N）",
-          "url": "https://www.softbank.jp/internet/option/hikaridenwa-n/",
-          "checks": [
-            "基本プラン（N）",
-            "550円",
-            "利用休止工事費"
-          ]
+          "name": "dカードお支払割",
+          "amount": -220,
+          "condition": "dカードの場合。カード種別により金額差あり"
+        }
+      ]
+    },
+    {
+      "id": "docomo-docomo-poikatsu-max-unlimited",
+      "carrier": "docomo",
+      "brand": "docomo",
+      "planName": "ドコモ ポイ活 MAX",
+      "tierName": "無制限",
+      "monthlyPrice": 11748,
+      "dataAmount": "無制限",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
         },
         {
-          "label": "光電話（N）初期費用",
-          "url": "https://www.softbank.jp/internet/set/data/terms/pdf/hikaridenwa-detail.pdf",
-          "checks": []
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
         },
         {
-          "label": "BBフォン",
-          "url": "https://www.softbank.jp/internet/option/bbphone/",
-          "checks": [
-            "BBフォン",
-            "050番号",
-            "光BBユニットレンタル",
-            "513円／月"
-          ]
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "みんなドコモ割",
+          "amount": -1210,
+          "condition": "1回線:0円、2回線:-550円、3回線以上:-1210円"
         },
         {
-          "label": "光BBユニットレンタル",
-          "url": "https://www.softbank.jp/internet/option/bbunit/",
-          "checks": [
-            "光BBユニット",
-            "513円／月",
-            "BBフォン"
-          ]
+          "name": "ドコモ光/home 5G セット割",
+          "amount": -1210,
+          "condition": "対象固定回線契約あり"
         },
         {
-          "label": "SoftBank 光 事業者変更",
-          "url": "https://www.softbank.jp/support/faq/view/19063",
-          "checks": [
-            "事業者変更",
-            "宅内工事",
-            "不要"
-          ]
+          "name": "dカードお支払割",
+          "amount": -220,
+          "condition": "dカードの場合。カード種別により金額差あり"
+        }
+      ]
+    },
+    {
+      "id": "docomo-docomo-mini-4gb",
+      "carrier": "docomo",
+      "brand": "docomo",
+      "planName": "ドコモ mini",
+      "tierName": "4GB",
+      "monthlyPrice": 2750,
+      "dataAmount": "4GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
         },
         {
-          "label": "SoftBank 光 事業者変更手数料",
-          "url": "https://www.softbank.jp/internet/cancellation-fee/",
-          "checks": [
-            "事業者変更手数料",
-            "3,300円"
-          ]
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
         },
         {
-          "label": "ソフトバンク光テレビ",
-          "url": "https://www.softbank.jp/internet/option/tv-n/",
-          "checks": [
-            "テレビ伝送",
-            "495円／月",
-            "テレビ視聴",
-            "3,080円／1契約ごと",
-            "29,700円"
-          ]
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "ドコモ光/home 5G セット割",
+          "amount": -1210,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "dカードお支払割",
+          "amount": -220,
+          "condition": "dカードの場合。カード種別により金額差あり"
+        }
+      ]
+    },
+    {
+      "id": "docomo-docomo-mini-10gb",
+      "carrier": "docomo",
+      "brand": "docomo",
+      "planName": "ドコモ mini",
+      "tierName": "10GB",
+      "monthlyPrice": 3850,
+      "dataAmount": "10GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "ドコモ光/home 5G セット割",
+          "amount": -1210,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "dカードお支払割",
+          "amount": -220,
+          "condition": "dカードの場合。カード種別により金額差あり"
+        }
+      ]
+    },
+    {
+      "id": "docomo-ahamo-30gb",
+      "carrier": "docomo",
+      "brand": "ahamo",
+      "planName": "ahamo",
+      "tierName": "30GB",
+      "monthlyPrice": 2970,
+      "dataAmount": "30GB",
+      "call": "5分国内通話無料、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "5分国内通話無料込み、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": []
+    },
+    {
+      "id": "docomo-ahamo-oomori-110gb",
+      "carrier": "docomo",
+      "brand": "ahamo",
+      "planName": "ahamo 大盛り",
+      "tierName": "110GB",
+      "monthlyPrice": 4950,
+      "dataAmount": "110GB",
+      "call": "5分国内通話無料、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "5分国内通話無料込み、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": []
+    },
+    {
+      "id": "au-au-value-link-unlimited",
+      "carrier": "au",
+      "brand": "au",
+      "planName": "auバリューリンクプラン",
+      "tierName": "使い放題",
+      "monthlyPrice": 8008,
+      "dataAmount": "使い放題（200GB/月超で制御の場合あり）",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "家族割プラス",
+          "amount": -1210,
+          "condition": "1人:0円、2人:-660円、3人以上:-1210円"
+        },
+        {
+          "name": "auスマートバリュー",
+          "amount": -1100,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "au PAY カードお支払い割",
+          "amount": -220,
+          "condition": "対象カード支払い"
+        }
+      ]
+    },
+    {
+      "id": "au-au-value-link-moneyact2-unlimited",
+      "carrier": "au",
+      "brand": "au",
+      "planName": "auバリューリンク マネ活2",
+      "tierName": "使い放題",
+      "monthlyPrice": 9328,
+      "dataAmount": "使い放題（200GB/月超で制御の場合あり）",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "auスマートバリュー",
+          "amount": -1100,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "通信料お支払い特典",
+          "amount": -1650,
+          "condition": "au PAY カード支払い+auじぶん銀行口座設定など。後日還元"
+        },
+        {
+          "name": "お買い物特典",
+          "amount": -2500,
+          "condition": "au PAY カード/au PAY利用など。Pontaポイント還元"
+        },
+        {
+          "name": "銀行あずけて特典",
+          "amount": -550,
+          "condition": "au PAY ゴールドカード会員かつauじぶん銀行残高条件など。後日還元"
+        }
+      ]
+    },
+    {
+      "id": "au-uq-tokutoku2-30gb",
+      "carrier": "au",
+      "brand": "UQ mobile",
+      "planName": "トクトクプラン2",
+      "tierName": "〜30GB",
+      "monthlyPrice": 4048,
+      "dataAmount": "〜30GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "talk-pack-60",
+          "label": "通話パック60",
+          "amount": 660,
+          "description": "月間最大60分相当の国内通話を定額化"
+        },
+        {
+          "id": "ten-minute",
+          "label": "10分かけ放題",
+          "amount": 880,
+          "description": "1回10分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "自宅セット割",
+          "amount": -1100,
+          "condition": "対象インターネット契約あり"
+        },
+        {
+          "name": "家族セット割",
+          "amount": -550,
+          "condition": "家族グループ参加。自宅セット割適用時は対象外"
+        },
+        {
+          "name": "〜5GB利用時割引",
+          "amount": -1100,
+          "condition": "月間データ利用量が5GB以下"
+        }
+      ]
+    },
+    {
+      "id": "au-uq-komikomi-value-35gb",
+      "carrier": "au",
+      "brand": "UQ mobile",
+      "planName": "コミコミプランバリュー",
+      "tierName": "35GB",
+      "monthlyPrice": 3828,
+      "dataAmount": "35GB",
+      "call": "10分以内国内通話かけ放題、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "10分以内国内通話かけ放題込み、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": []
+    },
+    {
+      "id": "au-povo2-zero",
+      "carrier": "au",
+      "brand": "povo",
+      "planName": "povo2.0",
+      "tierName": "基本料0円",
+      "monthlyPrice": 0,
+      "dataAmount": "トッピング購入型",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 550,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1650,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": []
+    },
+    {
+      "id": "softbank-paytoku2-unlimited",
+      "carrier": "softbank",
+      "brand": "SoftBank",
+      "planName": "ペイトク2",
+      "tierName": "無制限",
+      "monthlyPrice": 10538,
+      "dataAmount": "無制限",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "新みんな家族割",
+          "amount": -1210,
+          "condition": "1人:0円、2人:-660円、3人以上:-1210円"
+        },
+        {
+          "name": "おうち割 光セット",
+          "amount": -1100,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "PayPayカード割",
+          "amount": -330,
+          "condition": "PayPayカードの場合。ゴールドは550円"
+        }
+      ]
+    },
+    {
+      "id": "softbank-teigaku-unlimited",
+      "carrier": "softbank",
+      "brand": "SoftBank",
+      "planName": "テイガク無制限",
+      "tierName": "無制限",
+      "monthlyPrice": 8008,
+      "dataAmount": "無制限",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "新みんな家族割",
+          "amount": -1210,
+          "condition": "1人:0円、2人:-660円、3人以上:-1210円"
+        },
+        {
+          "name": "おうち割 光セット",
+          "amount": -1100,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "PayPayカード割",
+          "amount": -330,
+          "condition": "PayPayカードの場合。ゴールドは550円"
+        }
+      ]
+    },
+    {
+      "id": "softbank-minifit2-2gb",
+      "carrier": "softbank",
+      "brand": "SoftBank",
+      "planName": "ミニフィット2",
+      "tierName": "〜2GB",
+      "monthlyPrice": 5258,
+      "dataAmount": "〜2GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "新みんな家族割",
+          "amount": -550,
+          "condition": "1人:0円、2人:-220円、3人以上:-550円"
+        },
+        {
+          "name": "おうち割 光セット",
+          "amount": -1100,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "PayPayカード割",
+          "amount": -330,
+          "condition": "PayPayカードの場合。ゴールドは550円"
+        }
+      ]
+    },
+    {
+      "id": "softbank-minifit2-5gb",
+      "carrier": "softbank",
+      "brand": "SoftBank",
+      "planName": "ミニフィット2",
+      "tierName": "〜5GB",
+      "monthlyPrice": 6358,
+      "dataAmount": "〜5GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 880,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "新みんな家族割",
+          "amount": -550,
+          "condition": "1人:0円、2人:-220円、3人以上:-550円"
+        },
+        {
+          "name": "おうち割 光セット",
+          "amount": -1100,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "PayPayカード割",
+          "amount": -330,
+          "condition": "PayPayカードの場合。ゴールドは550円"
+        }
+      ]
+    },
+    {
+      "id": "softbank-linemo-best-3gb",
+      "carrier": "softbank",
+      "brand": "LINEMO",
+      "planName": "LINEMOベストプラン",
+      "tierName": "〜3GB",
+      "monthlyPrice": 990,
+      "dataAmount": "〜3GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 550,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1650,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": []
+    },
+    {
+      "id": "softbank-linemo-best-10gb",
+      "carrier": "softbank",
+      "brand": "LINEMO",
+      "planName": "LINEMOベストプラン",
+      "tierName": "〜10GB",
+      "monthlyPrice": 2090,
+      "dataAmount": "〜10GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "five-minute",
+          "label": "5分かけ放題",
+          "amount": 550,
+          "description": "1回5分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1650,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": []
+    },
+    {
+      "id": "softbank-linemo-best-v-30gb",
+      "carrier": "softbank",
+      "brand": "LINEMO",
+      "planName": "LINEMOベストプランV",
+      "tierName": "30GB",
+      "monthlyPrice": 2970,
+      "dataAmount": "30GB",
+      "call": "5分国内通話定額付き、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "5分国内通話定額付き、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": []
+    },
+    {
+      "id": "softbank-ymobile-simple3-s",
+      "carrier": "softbank",
+      "brand": "Y!mobile",
+      "planName": "シンプル3",
+      "tierName": "S 5GB",
+      "monthlyPrice": 3278,
+      "dataAmount": "5GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "ten-minute",
+          "label": "10分かけ放題",
+          "amount": 880,
+          "description": "1回10分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "PayPayカード割",
+          "amount": -330,
+          "condition": "PayPayカードの場合。ゴールドは550円+増額特典あり"
+        },
+        {
+          "name": "おうち割 光セット（A）",
+          "amount": -1650,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "家族割引",
+          "amount": -1100,
+          "condition": "2回線目以降"
+        }
+      ]
+    },
+    {
+      "id": "softbank-ymobile-simple3-m",
+      "carrier": "softbank",
+      "brand": "Y!mobile",
+      "planName": "シンプル3",
+      "tierName": "M 30GB",
+      "monthlyPrice": 4378,
+      "dataAmount": "30GB",
+      "call": "22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "22円/30秒"
+        },
+        {
+          "id": "ten-minute",
+          "label": "10分かけ放題",
+          "amount": 880,
+          "description": "1回10分以内の国内通話無料"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1980,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "PayPayカード割",
+          "amount": -330,
+          "condition": "PayPayカードの場合。ゴールドは550円+増額特典あり"
+        },
+        {
+          "name": "おうち割 光セット（A）",
+          "amount": -1650,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "家族割引",
+          "amount": -1100,
+          "condition": "2回線目以降"
+        }
+      ]
+    },
+    {
+      "id": "softbank-ymobile-simple3-l",
+      "carrier": "softbank",
+      "brand": "Y!mobile",
+      "planName": "シンプル3",
+      "tierName": "L 35GB",
+      "monthlyPrice": 5478,
+      "dataAmount": "35GB",
+      "call": "10分以内国内通話かけ放題、超過後22円/30秒",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "10分以内国内通話かけ放題込み、超過後22円/30秒"
+        },
+        {
+          "id": "unlimited",
+          "label": "かけ放題",
+          "amount": 1100,
+          "description": "国内通話24時間かけ放題"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "PayPayカード割",
+          "amount": -330,
+          "condition": "PayPayカードの場合。ゴールドは550円+増額特典あり"
+        },
+        {
+          "name": "おうち割 光セット（A）",
+          "amount": -1650,
+          "condition": "対象固定回線契約あり"
+        },
+        {
+          "name": "家族割引",
+          "amount": -1100,
+          "condition": "2回線目以降"
+        }
+      ]
+    },
+    {
+      "id": "rakuten-saikyo-3gb",
+      "carrier": "rakuten",
+      "brand": "Rakuten Mobile",
+      "planName": "Rakuten最強プラン",
+      "tierName": "〜3GB",
+      "monthlyPrice": 1078,
+      "dataAmount": "〜3GB",
+      "call": "Rakuten Link利用で国内通話無料、一部対象外あり",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "Rakuten Link利用で国内通話無料。一部対象外、標準電話アプリは22円/30秒"
+        },
+        {
+          "id": "fifteen-minute",
+          "label": "15分かけ放題",
+          "amount": 1100,
+          "description": "OS標準アプリで1回15分以内の国内通話無料"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "最強家族割",
+          "amount": -110,
+          "condition": "家族グループ参加"
+        }
+      ]
+    },
+    {
+      "id": "rakuten-saikyo-20gb",
+      "carrier": "rakuten",
+      "brand": "Rakuten Mobile",
+      "planName": "Rakuten最強プラン",
+      "tierName": "3GB超〜20GB",
+      "monthlyPrice": 2178,
+      "dataAmount": "3GB超〜20GB",
+      "call": "Rakuten Link利用で国内通話無料、一部対象外あり",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "Rakuten Link利用で国内通話無料。一部対象外、標準電話アプリは22円/30秒"
+        },
+        {
+          "id": "fifteen-minute",
+          "label": "15分かけ放題",
+          "amount": 1100,
+          "description": "OS標準アプリで1回15分以内の国内通話無料"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "最強家族割",
+          "amount": -110,
+          "condition": "家族グループ参加"
+        }
+      ]
+    },
+    {
+      "id": "rakuten-saikyo-unlimited",
+      "carrier": "rakuten",
+      "brand": "Rakuten Mobile",
+      "planName": "Rakuten最強プラン",
+      "tierName": "ギガ無制限",
+      "monthlyPrice": 3278,
+      "dataAmount": "ギガ無制限",
+      "call": "Rakuten Link利用で国内通話無料、一部対象外あり",
+      "callOptions": [
+        {
+          "id": "standard",
+          "label": "標準",
+          "amount": 0,
+          "description": "Rakuten Link利用で国内通話無料。一部対象外、標準電話アプリは22円/30秒"
+        },
+        {
+          "id": "fifteen-minute",
+          "label": "15分かけ放題",
+          "amount": 1100,
+          "description": "OS標準アプリで1回15分以内の国内通話無料"
+        }
+      ],
+      "discounts": [
+        {
+          "name": "最強家族割",
+          "amount": -110,
+          "condition": "家族グループ参加"
         }
       ]
     }

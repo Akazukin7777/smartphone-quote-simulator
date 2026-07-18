@@ -33,8 +33,26 @@ body.keypad-open {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
+}
+
+button,
+input,
+select,
+.amount-keypad {
+  touch-action: manipulation;
+}
+
+.amount-keypad,
+.keypad-card,
+.keypad-grid button,
+.keypad-done {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .app-shell {

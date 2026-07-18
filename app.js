@@ -92,6 +92,8 @@ const familyGroupSizeLabels = {
 let state = loadState();
 let activeAmountInput = null;
 let isApplyingSelectedPlan = false;
+let lastKeypadPointerAt = 0;
+let lastKeypadTouchEndAt = 0;
 
 function getStorage() {
   try {
@@ -1090,6 +1092,39 @@ function handleKeypadPress(event) {
   }
 }
 
+function handleKeypadPointer(event) {
+  const button = event.target.closest("[data-keypad-value], [data-keypad-action]");
+  if (!button || !keypad?.contains(button) || event.isPrimary === false) {
+    return;
+  }
+
+  event.preventDefault();
+  lastKeypadPointerAt = Date.now();
+  handleKeypadPress(event);
+}
+
+function handleKeypadClick(event) {
+  if (Date.now() - lastKeypadPointerAt < 450) {
+    event.preventDefault();
+    return;
+  }
+
+  handleKeypadPress(event);
+}
+
+function preventKeypadDoubleTapZoom(event) {
+  const button = event.target.closest("[data-keypad-value], [data-keypad-action]");
+  if (!button || !keypad?.contains(button)) {
+    return;
+  }
+
+  const now = Date.now();
+  if (now - lastKeypadTouchEndAt < 350) {
+    event.preventDefault();
+  }
+  lastKeypadTouchEndAt = now;
+}
+
 document.addEventListener("input", handleInput);
 document.addEventListener("change", handleInput);
 document.addEventListener("change", handlePlanSelect);
@@ -1111,7 +1146,9 @@ document.addEventListener("pointerdown", (event) => {
   window.setTimeout(closeKeypad, 160);
 });
 
-keypad?.addEventListener("click", handleKeypadPress);
+keypad?.addEventListener("pointerdown", handleKeypadPointer);
+keypad?.addEventListener("click", handleKeypadClick);
+keypad?.addEventListener("touchend", preventKeypadDoubleTapZoom, { passive: false });
 exportPdfButton?.addEventListener("click", handleExportPdf);
 window.addEventListener("beforeprint", renderPrintSheet);
 

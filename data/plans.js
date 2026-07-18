@@ -1,6 +1,6 @@
 window.MOBILE_PLAN_DB = {
   "schemaVersion": 1,
-  "checkedAt": "2026-07-17",
+  "checkedAt": "2026-07-18",
   "currency": "JPY",
   "plans": [
     {
@@ -835,6 +835,12 @@ window.MOBILE_PLAN_DB = {
           "label": "かけ放題",
           "amount": 1980,
           "description": "国内通話24時間かけ放題"
+        },
+        {
+          "id": "senior-unlimited",
+          "label": "60歳以上かけ放題",
+          "amount": 880,
+          "description": "60歳以上 通話ずーっと割引適用後。国内通話24時間かけ放題"
         }
       ],
       "discounts": [
@@ -882,6 +888,12 @@ window.MOBILE_PLAN_DB = {
           "label": "かけ放題",
           "amount": 1980,
           "description": "国内通話24時間かけ放題"
+        },
+        {
+          "id": "senior-unlimited",
+          "label": "60歳以上かけ放題",
+          "amount": 880,
+          "description": "60歳以上 通話ずーっと割引適用後。国内通話24時間かけ放題"
         }
       ],
       "discounts": [
@@ -923,6 +935,12 @@ window.MOBILE_PLAN_DB = {
           "label": "かけ放題",
           "amount": 1100,
           "description": "国内通話24時間かけ放題"
+        },
+        {
+          "id": "senior-unlimited",
+          "label": "60歳以上かけ放題",
+          "amount": 0,
+          "description": "60歳以上 通話ずーっと割引適用後。国内通話24時間かけ放題"
         }
       ],
       "discounts": [

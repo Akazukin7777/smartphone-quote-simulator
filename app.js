@@ -52,6 +52,7 @@ const defaultState = {
     deviceAfter24: "",
     downPayment: "",
     programFee: "",
+    useInstallmentReset: false,
     adminFee: "",
     warranty: "",
   },
@@ -425,11 +426,14 @@ function calculateQuote(values) {
   const isLump = values.paymentType === "lump";
   const firstDeviceMonthly = isLump ? 0 : toNumber(values.deviceFirst24);
   const afterDeviceMonthly = isLump ? 0 : toNumber(values.deviceAfter24);
-  const returnCost = toNumber(values.programFee);
-  const initialCost =
+  const useInstallmentReset = Boolean(values.useInstallmentReset);
+  const programFee = toNumber(values.programFee);
+  const baseInitialCost =
     toNumber(values.downPayment) +
     toNumber(values.adminFee) +
     (isLump ? toNumber(values.deviceLump) : 0);
+  const initialCost = baseInitialCost + (useInstallmentReset ? programFee : 0);
+  const returnCost = useInstallmentReset ? 0 : programFee;
   const monthlyFirst24 = commonMonthly + firstDeviceMonthly;
   const monthlyReturned = commonMonthly;
   const monthlyAfter24 = commonMonthly + afterDeviceMonthly;
@@ -442,6 +446,7 @@ function calculateQuote(values) {
     monthlyAfter24,
     initialCost,
     returnCost,
+    useInstallmentReset,
     discountTotal,
     callOptionMonthly,
     customDiscountMonthly: customDiscount.monthly,
@@ -515,6 +520,22 @@ function getCustomDiscountPrintRows(values) {
   ];
 }
 
+function getInstallmentResetPrintRows(values) {
+  if (!("useInstallmentReset" in values)) {
+    return [];
+  }
+
+  return [{ label: "分割リセット", value: values.useInstallmentReset ? "使う" : "使わない" }];
+}
+
+function getInitialCostLabel(quote) {
+  return quote.useInstallmentReset ? "初期・一括費用（返却時費用込み）" : "初期・一括費用";
+}
+
+function getReturnCostLabel(quote) {
+  return quote.useInstallmentReset ? "返却時費用（合算済み）" : "返却時費用";
+}
+
 function getQuoteInputRows(values) {
   const isLump = values.paymentType === "lump";
   const rows = [
@@ -534,6 +555,7 @@ function getQuoteInputRows(values) {
   rows.push(
     { label: "頭金", value: formatYenInput(values.downPayment) },
     { label: "プログラム利用料（返却時）", value: formatYenInput(values.programFee) },
+    ...getInstallmentResetPrintRows(values),
     { label: "事務手数料", value: formatYenInput(values.adminFee) },
     { label: "補償 / 月", value: formatYenInput(values.warranty) },
     ...getCustomDiscountPrintRows(values),
@@ -595,8 +617,8 @@ function renderPrintSheet() {
       { label: "通話オプション / 月", value: formatYen(change.callOptionMonthly), result: true },
       { label: "実質負担", value: formatYen(change.effectiveMonthlyFirst24), result: true },
       { label: "25〜48ヶ月目（継続時）", value: formatYen(change.monthlyAfter24), result: true },
-      { label: "初期・一括費用", value: formatYen(change.initialCost), result: true },
-      { label: "返却時費用", value: formatYen(change.returnCost), result: true },
+      { label: getInitialCostLabel(change), value: formatYen(change.initialCost), result: true },
+      { label: getReturnCostLabel(change), value: formatYen(change.returnCost), result: true },
     ]),
     createPrintCard("MNP", getQuoteInputRows(state.mnp), [
       { label: "1〜24ヶ月目", value: formatYen(mnp.monthlyFirst24), result: true },
@@ -604,8 +626,8 @@ function renderPrintSheet() {
       { label: "通話オプション / 月", value: formatYen(mnp.callOptionMonthly), result: true },
       { label: getEffectiveLabel("実質負担", mnp.customDiscountMonths), value: formatYen(mnp.effectiveMonthlyFirst24), result: true },
       { label: "25〜48ヶ月目（継続時）", value: formatYen(mnp.monthlyAfter24), result: true },
-      { label: "初期・一括費用", value: formatYen(mnp.initialCost), result: true },
-      { label: "返却時費用", value: formatYen(mnp.returnCost), result: true },
+      { label: getInitialCostLabel(mnp), value: formatYen(mnp.initialCost), result: true },
+      { label: getReturnCostLabel(mnp), value: formatYen(mnp.returnCost), result: true },
     ]),
   );
 
@@ -879,7 +901,9 @@ function updateResults() {
     setOutput(panel, "monthlyReturned", quote.monthlyReturned);
     setOutput(panel, "monthlyAfter24", quote.monthlyAfter24);
     setOutput(panel, "initialCost", quote.initialCost);
+    setOutputLabel(panel, "initialCost", getInitialCostLabel(quote));
     setOutput(panel, "returnCost", quote.returnCost);
+    setOutputLabel(panel, "returnCost", getReturnCostLabel(quote));
   });
 
   document.querySelector("#summary-current").textContent = formatYen(current.monthly);

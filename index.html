@@ -422,6 +422,11 @@
               <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="programFee" placeholder="例: 0" />
             </label>
 
+            <label class="check-option">
+              <input type="checkbox" data-key="useInstallmentReset" />
+              <span>分割リセットを使う</span>
+            </label>
+
             <label class="form-field">
               <span>事務手数料</span>
               <input type="text" inputmode="none" pattern="[0-9]*" autocomplete="off" data-key="adminFee" placeholder="例: 3850" />
@@ -455,11 +460,11 @@
               <strong data-output="monthlyAfter24">¥0</strong>
             </div>
             <div class="result-line">
-              <span>初期・一括費用</span>
+              <span data-output-label="initialCost">初期・一括費用</span>
               <strong data-output="initialCost">¥0</strong>
             </div>
             <div class="result-line">
-              <span>返却時費用</span>
+              <span data-output-label="returnCost">返却時費用</span>
               <strong data-output="returnCost">¥0</strong>
             </div>
           </section>

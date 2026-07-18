@@ -370,6 +370,37 @@ h1 {
   cursor: not-allowed;
 }
 
+.check-option {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 9px;
+  align-items: center;
+  min-height: 42px;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-strong);
+  cursor: pointer;
+}
+
+.check-option input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.check-option span {
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.check-option:has(input:checked) {
+  border-color: rgba(15, 118, 110, 0.45);
+  background: var(--accent-soft);
+}
+
 .family-line-field.is-hidden,
 .family-count-field.is-hidden {
   display: none;

@@ -1,2 +1,8 @@
 # Local Netlify folder
 .netlify
+
+# Local Cloudflare Wrangler cache
+.wrangler
+
+# Local temporary artifacts
+tmp
